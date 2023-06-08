@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myBtn" type="button">Test it Out</button>
+
+    <script>
+    let request;
+    //first, get button and add an event listenenser, we set the even to click and gave it a function to execute once the 
+    //button is clicked
+    document.getElementById("myBtn").addEventListener("click", testRequest);
+    //Next we define the function and what it will do
+    function testRequest() {
+        request = new XMLHttpRequest();
+    //we set a conditional statement, if request XHR object does not exist, then we alert and return false. 
+    //the syntax of !request below is saying, if request=>returns true if xhr request exists, otherwise returns false.
+    //! means we want it to return false to execute the code below
+        if (!request) {
+            alert("Failed to create an XMLHttpRequest Object.");
+            return false;
+        }
+    //XHRobjectvariablename.onreadystatechange, this fires(executes) when the readystaed property of the xhr object changes
+    //the state of the xhr readystate changes between 0-5. These are different statuses of the request. so,
+        request.onreadystatechange = alertResponse;
+        request.open("GET", "test.html");
+        request.send();
+    }
+    
+     function alertResponse() {
+
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                //XHRobjectvariablename.responseText is used to access a text based file with the response data
+                alert(request.responseText);
+            } else {
+                //XHRobjectvariablename.status is used to access the status of the request
+                alert("The request returned a status other than 200 OK: " + request.status);
+            }
+        }
+        //1. create item that can be acted on in html webpage. 2. access item and create event listener. 3. create function of what to do during 
+    }
+    </script>
+</body>
+</html>
